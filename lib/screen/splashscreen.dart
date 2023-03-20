@@ -19,28 +19,23 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState()
   {
     super.initState();
-    Timer(const Duration(seconds: 3), () => Navigator.pushReplacementNamed(context, 'home'));
+    Timer(const Duration(seconds: 5), () => Navigator.pushReplacementNamed(context, 'home'));
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          color: Clr.bg,
+          color: Colors.black,
         ),
         alignment: Alignment.center,
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              DelayedDisplay(
-                delay: Duration(seconds: 1),
-                child: Image(
-                  image: AssetImage('images/n1-re.png',),
-                  height: 280,
-                ),
-              ),
-            ],
+          child: DelayedDisplay(
+            delay: Duration(seconds: 2),
+            child: Image(
+              image: AssetImage('images/author-removebg-preview.png',),
+              height: 200,
+            ),
           ),
         ),
       ),
