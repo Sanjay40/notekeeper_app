@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          color: Colors.black,
+          color:Clr.bg,
         ),
         alignment: Alignment.center,
         child: Center(
