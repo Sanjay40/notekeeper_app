@@ -142,7 +142,7 @@ class _AddAuthorState extends State<AddAuthor> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+
           if(validateKey.currentState!.validate()){
             if(Author.state == true)
             {
@@ -152,7 +152,9 @@ class _AddAuthorState extends State<AddAuthor> {
             {
               dbHelper.updateData(index: index!);
             }
+            Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
           }
+
         },
         backgroundColor: Clr.bg,
         child: Icon(Icons.arrow_circle_right_outlined),
