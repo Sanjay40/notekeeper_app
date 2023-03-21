@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:notekeeper_app/helper/databasehelper.dart';
 import 'package:notekeeper_app/utils/variable.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../utils/colors.dart';
 
 class AddNotes extends StatefulWidget {
@@ -15,15 +14,23 @@ class AddNotes extends StatefulWidget {
 class _AddNotesState extends State<AddNotes> {
    GlobalKey<FormState> validateKey = GlobalKey<FormState>();
   DatabaseHelper dbHelper = DatabaseHelper.instance;
+  // void initState(){
+  //   super.initState();
+  //   Notes.title.clear();
+  //   Notes.des.clear();
+  // }
   @override
   Widget build(BuildContext context) {
    int? index = ModalRoute.of(context)?.settings.arguments as int?;
    print("$index");
-   WidgetsBinding.instance.addPostFrameCallback((_) {
-     Notes.title.text = Notes.data[index!]['Title'];
-      Notes.des.text = Notes.data[index]['Description'];
-   });
+   if(Notes.state == false){
+     WidgetsBinding.instance.addPostFrameCallback((_) {
+       Notes.title.text = Notes.data[index!]['Title'];
+       Notes.des.text = Notes.data[index]['Description'];
+     });
+   }
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey.shade100,
       body: SafeArea(
         child: Padding(
@@ -145,7 +152,7 @@ class _AddNotesState extends State<AddNotes> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+
           if(validateKey.currentState!.validate()){
            if(Notes.state == true)
             {
@@ -155,7 +162,9 @@ class _AddNotesState extends State<AddNotes> {
              {
                dbHelper.updateData(index: index!);
              }
+           Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
           }
+
         },
         backgroundColor: Clr.bg,
         child: Icon(Icons.arrow_circle_right_outlined),
